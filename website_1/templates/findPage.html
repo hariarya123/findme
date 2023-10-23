@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner&family=Pacifico&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">   
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('/media/images/simple.png/') no-repeat center/cover,url('{{k}}'),rgba(7, 249, 249, 0.941);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            
+
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #0cdffafd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .item {
+            background-color: #ffffffc9;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .item:hover {
+            transform: translateY(-5px);
+        }
+
+        .item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .item h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: #060505;
+        }
+
+        .item p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .item a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .item a:hover {
+            background-color: #0056b3;
+        }
+
+        .video-container {
+            text-align: center;
+            margin-top: 20px;
+            color: red;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            border: 0;
+            border-radius: 8px;
+        }
+        .submit-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #dadde11a;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            /* width and height properties are conflicting, choose one */
+          }
+          input {
+            border-radius: 130px;
+            height: 50px;
+            width: 800px;
+            font-size: 25px;
+            /* Remove animation and alignment properties */
+          }
+          
+          ul {
+            list-style-type: none;
+            margin: 30; /* Reset default margin */
+            padding: 40; /* Reset default padding */
+            overflow: hidden;
+            display: inline;
+          }
+          li{
+            display: inline;
+          }
+          marquee {
+      background-color: whitesmoke; /* Change to your desired background color */
+      padding: 10px; /* Add padding for spacing */
+    }
+          
+    </style>
+</head>
+<body>
+    <div class="header">
+        <form action="/search/" method="POST">
+            {% csrf_token %}    
+            <i class=></i>
+            <li> <input type="text" placeholder="      Find anything From anywhere   " id="search" name="search" ></li>
+            <li><div class="submit-button" onclick="submitForm()"><i class="fa-brands fa-searchengin fa-beat fa-2xl"></i></div></li>
+            </li>      
+             
+            </form>
+    </div>
+    <div class="container">
+        
+        <div class="item">
+            <img src="{{ item.img.url }}" alt="{{ item.name }}">
+            <h1>{{ item.name }}</h1>
+            <p>Price: ${{ item.price }}</p>
+            <a href="{% url 'show' i=item.id %}">findit</a>
+            <a href="{% url 'download' item.id %}">Download</a>
+
+
+
+            
+
+        </div>
+        
+        <h2 style="color: #ffffff;">{{item.bio}} 
+
+            price: ${{ item.price }} <br>
+            available place: {{ item.address }} <br>
+            status: available
+                
+            </h2>
+    </div>
+    <div class="video-container">
+       
+        {% if item.url_field  %}
+        <div>
+            <iframe
+            src="{{k}}"
+            width="600"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        {%endif%}
+        <marquee behavior="" direction="left" > <h2>  In the event that your current location is distant, do not hesitate to initiate a phone call to our service for immediate assistance and support. Your safety and well-being remain our utmost priority.</h3>
+        </h2></marquee>
+    </div>
+</body>
+</html>
